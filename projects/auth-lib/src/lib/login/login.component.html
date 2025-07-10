@@ -5,54 +5,52 @@
     </mat-card-header>
 
     <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="login()">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Email</mat-label>
-          <input
-            matInput
-            type="email"
-            formControlName="username"
-            required
-            title="Email"
-          />
-          <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
-            Email obbligatoria
-          </mat-error>
-          <mat-error *ngIf="loginForm.get('username')?.hasError('email')">
-            Email non valida
-          </mat-error>
-        </mat-form-field>
+      <div class="form-fields-wrapper">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <ng-container *ngFor="let field of fields">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>{{ field.label }}</mat-label>
+              <input
+                class="mat-imput"
+                matInput
+                [type]="field.type"
+                [formControlName]="field.formControlName"
+                [required]="field.required || false"
+                [title]="field.label"
+              />
+              <ng-container
+                *ngFor="let errorKey of getErrorKeys(field.errorMessages)"
+              >
+                <mat-error
+                  *ngIf="
+                    getFormControl(field.formControlName)?.hasError(errorKey) &&
+                    (getFormControl(field.formControlName)?.touched ||
+                      submitted)
+                  "
+                >
+                  {{ field.errorMessages?.[errorKey] }}
+                </mat-error>
+              </ng-container>
+            </mat-form-field>
+          </ng-container>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Password</mat-label>
-          <input
-            matInput
-            type="password"
-            formControlName="password"
-            required
-            title="Password"
-          />
-          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
-            Password obbligatoria
-          </mat-error>
-        </mat-form-field>
-
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          class="full-width"
-        >
-          Login
-        </button>
-      </form>
-
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="full-width"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+      <!-- Social buttons -->
       <div class="auth-options">
         <a
           routerLink="/register"
           mat-stroked-button
           color="accent"
-          class="full-width"
+          class="full-width register-btn"
         >
           Non hai un account? Registrati
         </a>

@@ -1,56 +1,242 @@
+/* -----------------------------------------------
+  🎨 Variabili di tema (se usate direttamente qui)
+------------------------------------------------ */
+:root {
+  --primary-color: #1976d2;
+  --primary-color-dark: #1565c0;
+  --accent-color: #546e7a;
+  --warn-color: #d32f2f;
+  --background-color: #ffffff;
+  --input-bg-color: #f6f9fc;
+  --input-bg-color-dark: #cc8028;
+  --border-radius: 50px;
+  --font-family: "Roboto", "Inter", sans-serif;
+}
+
+/* -----------------------------------------------
+  📦 Container e card layout
+------------------------------------------------ */
 .login-container {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  padding: 1rem;
+  background: linear-gradient(to bottom right, #e3f2fd, #bbdefb);
 }
 
 .login-card {
+  border: 1px solid black !important;
+  border-radius: 30px !important;
   width: 100%;
-  max-width: 400px;
-  padding: 1rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  border-radius: 1rem;
+  max-width: 420px;
+  padding: 3rem 2.5rem;
+  border-radius: 16px;
+  background: var(--background-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
-.full-width {
-  width: 100%;
-  margin-top: 1rem;
+/* -----------------------------------------------
+  🧾 Titolo
+------------------------------------------------ */
+mat-card-title {
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  margin-bottom: 2rem !important;
+  color: var(--primary-color) !important;
+  width: 100% !important;
 }
 
-.auth-options {
+/* -----------------------------------------------
+  ✏️ Campi di input Material (MDC)
+------------------------------------------------ */
+mat-form-field.full-width {
+  width: 100% !important;
+  margin-bottom: 1.8rem !important;
+}
+
+/* Rimuove spazio vuoto generato da MDC hint/error wrapper */
+::ng-deep .mat-mdc-text-field-wrapper {
+  border-radius: 30px !important;
+  background-color: #f6f9fc;
+}
+
+::ng-deep .mdc-notched-outline,
+::ng-deep .mdc-notched-outline__leading,
+::ng-deep .mdc-notched-outline__trailing {
+  border: 1px solid #000 !important;
+  border-color: #000 !important;
+  border-width: 1px !important;
+  border-radius: 30px !important;
+}
+
+::ng-deep .mat-mdc-form-field-flex {
+  padding: 0.6rem 1rem;
+}
+
+::ng-deep .mat-mdc-form-field-hint-wrapper {
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+::ng-deep .mat-mdc-form-field-hint-spacer {
+  display: none !important;
+}
+
+/* Applica stile pill-shaped ai campi */
+::ng-deep .mat-mdc-form-field {
+  padding: 0 !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  border-radius: var(--border-radius) !important;
+  background-color: var(--input-bg-color);
+}
+
+::ng-deep .mat-mdc-form-field-flex {
+  padding: 0.5rem 1rem;
+}
+
+::ng-deep .mat-mdc-form-field-icon-prefix {
+  margin-right: 0.5rem;
+  align-self: center;
+}
+
+::ng-deep .mdc-notched-outline,
+::ng-deep .mdc-notched-outline__leading,
+::ng-deep .mdc-notched-outline__trailing {
+  border-radius: var(--border-radius) !important;
+  border-width: 1px !important;
+}
+
+::ng-deep .mat-mdc-form-field.mat-focused .mat-mdc-form-field-outline-thick {
+  border-color: var(--primary-color);
+}
+
+::ng-deep .mat-form-field-label {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+::ng-deep input.mat-input-element {
+  font-size: 1rem;
+  font-family: var(--font-family);
+}
+
+::ng-deep .mat-mdc-form-field {
+  --mdc-shape-small: 50px; /* fondamentale */
+  border-radius: 50px !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  border-radius: 50px !important;
+  background-color: var(--input-bg-color) !important;
+}
+
+/* Pulsante 'Chiudi' */
+.mat-mdc-snack-bar-action {
+  background-color: transparent !important;
+  color: rgb(0, 0, 0) !important;
+}
+
+.mat-mdc-snack-bar-action:hover {
+  background-color: transparent !important;
+  .mdc-button__label {
+    color: #ffffff;
+  }
+}
+
+/* -----------------------------------------------
+  ❗ Messaggi di errore
+------------------------------------------------ */
+mat-error {
+  font-size: 0.85rem;
+  color: var(--warn-color) !important;
+}
+
+/* -----------------------------------------------
+  🔘 Pulsanti principali
+------------------------------------------------ */
+button.full-width {
+  width: 100%;
   margin-top: 1.5rem;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  background-color: var(--input-bg-color-dark) !important;
+  color: white !important;
+  transition: background-color 0.3s;
+  font-family: var(--font-family);
+}
+
+button.full-width:hover {
+  background-color: var(--primary-color-dark);
+}
+
+/* -----------------------------------------------
+  🌐 Sezione Auth/Registrazione/Social
+------------------------------------------------ */
+.auth-options {
+  margin-top: 0rem;
   text-align: center;
 }
 
 .auth-options .divider {
-  margin: 1rem 0;
+  margin: 1.5rem 0 1rem;
   font-size: 0.9rem;
-  color: #777;
-  position: relative;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .auth-options .divider::before,
 .auth-options .divider::after {
   content: "";
-  display: inline-block;
-  width: 30%;
+  flex: 1;
   height: 1px;
   background-color: #ccc;
-  vertical-align: middle;
   margin: 0 10px;
 }
 
+/* Register button */
+.register-btn {
+  border: 1px solid #000;
+  border-radius: 20px !important;
+  margin-top: 1rem !important;
+  display: inline-flex !important;
+  width: 100% !important;
+}
+
+/* Bottoni social (Google/GitHub) */
 .auth-btn {
+  border: 1px solid #000;
+  border-radius: 20px !important;
+  padding: 0.7rem 1rem;
+  background-color: #fff;
   width: 100%;
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  font-family: var(--font-family);
 }
 
-.register-link {
-  margin-top: -0.5rem !important;
+.auth-btn span {
+  display: flex;
+  align-items: center;
+}
+
+/* Link registrati */
+a.full-width {
+  display: block;
+  margin-top: 1.2rem;
+  font-size: 0.95rem;
+  font-family: var(--font-family);
+  text-align: center;
 }

@@ -1,10 +1,20 @@
+import { FormControl, ValidatorFn } from '@angular/forms';
+
 import { InjectionToken } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 export interface LoginForm {
   username: FormControl<string>;
   password: FormControl<string>;
+}
+
+export interface LoginFieldConfig {
+  label: string;
+  type: string;
+  formControlName: string;
+  required?: boolean;
+  validators?: ValidatorFn[];
+  errorMessages?: { [errorKey: string]: string };
 }
 
 export interface AuthConfig {

@@ -4,10 +4,9 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "auth-lib": [
-        "./dist/auth-lib"
-      ]
+      "auth-lib": ["./dist/auth-lib"]
     },
+    "composite": true,
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -35,5 +34,6 @@
     {
       "path": "./projects/auth-lib/tsconfig.spec.json"
     }
-  ]
+  ],
+  "include": ["**/*.spec.ts", "**/*.ts"]
 }
