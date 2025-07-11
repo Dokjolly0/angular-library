@@ -56,6 +56,10 @@ mat-form-field.full-width {
   margin-bottom: 1.8rem !important;
 }
 
+mat-form-field:not(:has(mat-error)) .mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
+
 /* Rimuove spazio vuoto generato da MDC hint/error wrapper */
 ::ng-deep .mat-mdc-text-field-wrapper {
   border-radius: 30px !important;

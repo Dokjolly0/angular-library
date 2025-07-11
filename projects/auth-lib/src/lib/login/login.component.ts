@@ -1,9 +1,7 @@
 import {
-  AUTH_CONFIG,
-  AUTH_SERVICE,
-  AuthServiceInterface,
   LoginFieldConfig,
-} from '../../interfaces/auth-service.interfaces';
+  AUTH_CONFIG,
+} from '../../interfaces/auth-lib.config.interfaces';
 import { Component, Input, ViewEncapsulation, inject } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
@@ -24,6 +22,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { gitHubSVG } from '../../svg/github.svg';
 import { googleSVG } from '../../svg/google.svg';
+import {
+  AUTH_SERVICE,
+  AuthServiceInterface,
+} from '../../interfaces/auth-lib.service.interfaces';
 
 @Component({
   selector: 'app-login',

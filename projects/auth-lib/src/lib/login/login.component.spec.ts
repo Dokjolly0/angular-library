@@ -1,8 +1,7 @@
 import {
   AUTH_CONFIG,
-  AUTH_SERVICE,
   LoginFieldConfig,
-} from '../../interfaces/auth-service.interfaces';
+} from '../../interfaces/auth-lib.config.interfaces';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -18,6 +17,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import { provideRouter } from '@angular/router';
+import { AUTH_SERVICE } from '../../interfaces/auth-lib.service.interfaces';
 
 describe('LoginComponent Template', () => {
   let component: LoginComponent;

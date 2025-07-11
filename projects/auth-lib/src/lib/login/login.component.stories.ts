@@ -1,7 +1,5 @@
-import {
-  AUTH_CONFIG,
-  AUTH_SERVICE,
-} from '../../interfaces/auth-service.interfaces';
+import { AUTH_CONFIG } from '../../interfaces/auth-lib.config.interfaces';
+import { AUTH_SERVICE } from '../../interfaces/auth-lib.service.interfaces';
 import { Meta, StoryObj } from '@storybook/angular';
 
 import { ActivatedRoute } from '@angular/router';
