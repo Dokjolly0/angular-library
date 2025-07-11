@@ -1,7 +1,8 @@
 import { ValidatorFn } from '@angular/forms';
 import { InjectionToken } from '@angular/core';
+import { Observable } from 'rxjs';
 
-export interface LoginFieldConfig {
+export interface FieldConfig {
   label: string;
   type: string;
   formControlName: string;
@@ -11,10 +12,22 @@ export interface LoginFieldConfig {
 }
 
 export interface AuthConfig {
-  googleAuthLink: string;
-  gitHubAuthLink: string;
+  googleAuthLink?: string;
+  gitHubAuthLink?: string;
+  enableGoogleAuth?: boolean;
+  enableGitHubAuth?: boolean;
+  loginFn?: (username: string, password: string) => Observable<any>;
+  registerFn?: (data: any) => Observable<any>;
+}
+export const AUTH_CONFIG = new InjectionToken<AuthConfig>('AUTH_CONFIG');
+
+export interface RegisterConfig {
+  registerFn: (data: FormData | any) => Observable<any>;
+  googleAuthLink?: string;
+  gitHubAuthLink?: string;
   enableGoogleAuth?: boolean;
   enableGitHubAuth?: boolean;
 }
-
-export const AUTH_CONFIG = new InjectionToken<AuthConfig>('AUTH_CONFIG');
+export const REGISTER_CONFIG = new InjectionToken<RegisterConfig>(
+  'REGISTER_CONFIG'
+);

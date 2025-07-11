@@ -7,101 +7,30 @@
     <mat-card-content class="register-content">
       <form [formGroup]="registerForm" (ngSubmit)="register()">
         <div class="form-grid">
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Nome</mat-label>
-            <input matInput formControlName="firstname" required />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Cognome</mat-label>
-            <input matInput formControlName="lastname" required />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="username" type="email" required />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Password</mat-label>
-            <input
-              matInput
-              formControlName="password"
-              [type]="hidePassword ? 'password' : 'text'"
-              required
-            />
-            <mat-icon matSuffix (click)="togglePasswordVisibility()"
-              >visibility</mat-icon
-            >
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Conferma Password</mat-label>
-            <input
-              matInput
-              formControlName="checkpassword"
-              type="password"
-              [type]="hideConfirmPassword ? 'password' : 'text'"
-              required
-            />
-            <mat-icon matSuffix (click)="togglePasswordVisibility(true)"
-              >visibility</mat-icon
-            >
-            <mat-error *ngIf="registerForm.hasError('passwordMismatch')">
-              Le password non corrispondono
-            </mat-error>
-          </mat-form-field>
-
-          <!-- <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Data di nascita (opzionale)</mat-label>
-            <input
-              matInput
-              [matDatepicker]="picker"
-              formControlName="birthDate"
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Genere (opzionale)</mat-label>
-            <mat-select formControlName="gender">
-              <mat-option *ngFor="let g of genderOptions" [value]="g">{{
-                g
-              }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Immagine (opzionale)</mat-label>
-            <input
-              matInput
-              [value]="uploadedFileName || 'Nessuna immagine caricata'"
-              readonly
-              (click)="openImageDialog()"
-            />
-            <button
-              mat-icon-button
-              matSuffix
-              [matTooltip]="
-                uploadedFileName ? 'Immagine caricata' : 'Carica immagine'
-              "
-              [color]="uploadedFileName ? 'primary' : ''"
-              (click)="openImageDialog()"
-              type="button"
-            >
-              <mat-icon>{{
-                uploadedFileName ? "check_circle" : "cloud_upload"
-              }}</mat-icon>
-            </button>
-          </mat-form-field> -->
-
-          <!-- <div *ngIf="previewImage" class="form-field">
-              <img [src]="previewImage" alt="Anteprima immagine" width="150" />
-            </div> -->
+          <ng-container *ngFor="let field of fields">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>{{ field.label }}</mat-label>
+              <input
+                matInput
+                [type]="field.type"
+                [formControlName]="field.formControlName"
+                [required]="field.required || false"
+              />
+              <ng-container
+                *ngFor="let errorKey of getErrorKeys(field.errorMessages)"
+              >
+                <mat-error
+                  *ngIf="
+                    getFormControl(field.formControlName)?.hasError(errorKey) &&
+                    (getFormControl(field.formControlName)?.touched ||
+                      submitted)
+                  "
+                >
+                  {{ field.errorMessages?.[errorKey] }}
+                </mat-error>
+              </ng-container>
+            </mat-form-field>
+          </ng-container>
         </div>
 
         <button
@@ -123,29 +52,33 @@
             Hai già un account? Accedi
           </a>
 
-          <!-- <div class="divider">oppure</div>
+          <div class="divider" *ngIf="showGoogleAuth || showGitHubAuth">
+            oppure
+          </div>
 
           <button
+            *ngIf="showGoogleAuth"
             mat-stroked-button
             color="warn"
             class="auth-btn"
-            (click)="registerWithGoogle()"
             type="button"
+            (click)="registerWithGoogle()"
           >
             <span [innerHTML]="googleSVG(24)"></span>
-            Accedi con Google
+            Registrati con Google
           </button>
 
           <button
+            *ngIf="showGitHubAuth"
             mat-stroked-button
             color="accent"
             class="auth-btn"
-            (click)="registerWithGithub()"
             type="button"
+            (click)="registerWithGithub()"
           >
             <span [innerHTML]="gitHubSVG(24)"></span>
-            Accedi con GitHub
-          </button> -->
+            Registrati con GitHub
+          </button>
         </div>
       </form>
     </mat-card-content>

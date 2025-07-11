@@ -1,6 +1,6 @@
 import {
   AUTH_CONFIG,
-  LoginFieldConfig,
+  FieldConfig,
 } from '../../interfaces/auth-lib.config.interfaces';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -17,13 +17,12 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import { provideRouter } from '@angular/router';
-import { AUTH_SERVICE } from '../../interfaces/auth-lib.service.interfaces';
 
 describe('LoginComponent Template', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
-  const mockFields: LoginFieldConfig[] = [
+  const mockFields: FieldConfig[] = [
     {
       label: 'Email',
       type: 'email',
@@ -57,7 +56,6 @@ describe('LoginComponent Template', () => {
       ],
       providers: [
         provideRouter([]),
-        { provide: AUTH_SERVICE, useValue: { login: () => of(true) } },
         {
           provide: AUTH_CONFIG,
           useValue: {
@@ -65,6 +63,7 @@ describe('LoginComponent Template', () => {
             gitHubAuthLink: 'https://github.com',
             enableGoogleAuth: true,
             enableGitHubAuth: false,
+            loginFn: (username: string, password: string) => of(true),
           },
         },
       ],

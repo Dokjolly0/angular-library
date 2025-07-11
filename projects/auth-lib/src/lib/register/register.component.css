@@ -4,18 +4,24 @@
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-}
-
-.register-content {
-  margin-top: 1.5rem;
+  padding: 1rem;
 }
 
 .register-card {
   width: 100%;
   max-width: 600px;
-  padding: 1rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  background-color: white;
+}
+
+mat-card-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1976d2;
+  margin-bottom: 2rem;
 }
 
 .form-grid {
@@ -24,13 +30,40 @@
   gap: 1rem;
 }
 
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .form-field {
   width: 100%;
 }
 
-.full-width {
+mat-form-field {
   width: 100%;
-  margin-top: 1rem;
+}
+
+mat-error {
+  font-size: 0.85rem;
+  color: #d32f2f !important;
+}
+
+button.full-width {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  background-color: #cc8028 !important;
+  color: white !important;
+  transition: background-color 0.3s;
+  font-family: "Roboto", "Inter", sans-serif;
+}
+
+button.full-width:hover {
+  background-color: #1565c0;
 }
 
 .auth-options {
@@ -39,45 +72,47 @@
 }
 
 .auth-options .divider {
-  margin: 1rem 0;
+  margin: 1.5rem 0 1rem;
   font-size: 0.9rem;
-  color: #777;
-  position: relative;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .auth-options .divider::before,
 .auth-options .divider::after {
   content: "";
-  display: inline-block;
-  width: 30%;
+  flex: 1;
   height: 1px;
   background-color: #ccc;
-  vertical-align: middle;
   margin: 0 10px;
 }
 
-.image-upload-link {
-  position: relative;
+.auth-btn {
+  border: 1px solid #000;
+  border-radius: 20px !important;
+  padding: 0.7rem 1rem;
+  background-color: #fff;
+  width: 100%;
+  margin-top: 0.6rem;
   display: flex;
   align-items: center;
-  bottom: 0.5rem;
-}
-
-.upload-link {
-  padding: 0;
-  font-size: 0.9rem;
-  text-transform: none;
+  justify-content: center;
+  gap: 0.6rem;
   font-weight: 500;
-  color: #42a5f5; /* azzurro Material */
+  font-family: "Roboto", "Inter", sans-serif;
 }
 
-.upload-link mat-icon {
-  font-size: 18px;
-  margin-right: 4px;
+.auth-btn span {
+  display: flex;
+  align-items: center;
 }
 
-@media (max-width: 600px) {
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
+a.full-width {
+  display: block;
+  margin-top: 1.2rem;
+  font-size: 0.95rem;
+  text-align: center;
+  font-family: "Roboto", "Inter", sans-serif;
 }

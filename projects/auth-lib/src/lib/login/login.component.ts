@@ -1,5 +1,5 @@
 import {
-  LoginFieldConfig,
+  FieldConfig,
   AUTH_CONFIG,
 } from '../../interfaces/auth-lib.config.interfaces';
 import { Component, Input, ViewEncapsulation, inject } from '@angular/core';
@@ -22,10 +22,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { gitHubSVG } from '../../svg/github.svg';
 import { googleSVG } from '../../svg/google.svg';
-import {
-  AUTH_SERVICE,
-  AuthServiceInterface,
-} from '../../interfaces/auth-lib.service.interfaces';
 
 @Component({
   selector: 'app-login',
@@ -45,7 +41,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {
-  @Input() fields: LoginFieldConfig[] = [];
+  @Input() fields: FieldConfig[] = [];
 
   loginForm!: FormGroup;
   loginError = '';
@@ -56,8 +52,6 @@ export class LoginComponent {
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
   private sanitizer = inject(DomSanitizer);
-
-  private authSrv = inject<AuthServiceInterface>(AUTH_SERVICE);
   private config = inject(AUTH_CONFIG);
 
   ngOnInit(): void {
@@ -89,8 +83,14 @@ export class LoginComponent {
     this.submitted = true;
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
-      this.authSrv
-        .login(username, password)
+
+      if (!this.config.loginFn) {
+        console.error('loginFn non è definita');
+        return;
+      }
+
+      this.config
+        .loginFn(username, password)
         .pipe(
           takeUntil(this.destroyed$),
           catchError((err) => {
@@ -114,11 +114,21 @@ export class LoginComponent {
   }
 
   loginWithGoogle(): void {
-    window.location.href = this.config.googleAuthLink;
+    if (this.config.googleAuthLink)
+      window.location.href = this.config.googleAuthLink;
+    else
+      console.error(
+        'Link di OAuth per google non inserito nella configurazione'
+      );
   }
 
   loginWithGithub(): void {
-    window.location.href = this.config.gitHubAuthLink;
+    if (this.config.gitHubAuthLink)
+      window.location.href = this.config.gitHubAuthLink;
+    else
+      console.error(
+        'Link di OAuth per google non inserito nella configurazione'
+      );
   }
 
   googleSVG(pixel: number): SafeHtml {
